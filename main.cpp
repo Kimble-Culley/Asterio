@@ -2,16 +2,18 @@
 #include "raylib.h"
 #include "Headers/ship.h"
 
-const int screenWidth = 1080;
-const int screenHeight = 720;
 
+struct screenParam{
+int screenWidth = 1080;
+int screenHeight = 720;
+};
 
 
 int main(){
-InitWindow(screenWidth,screenHeight,"Asteroids");
+    screenParam screen;
+InitWindow(screen.screenWidth,screen.screenHeight,"Asteroids");
 SetTargetFPS(60);
-
-ship myShip(screenWidth/2,screenHeight/2,100,WHITE);
+ship myShip(screen.screenWidth/2,screen.screenHeight/2,20,WHITE);
 while(!WindowShouldClose()){
 
 
@@ -19,6 +21,9 @@ while(!WindowShouldClose()){
 
     BeginDrawing();
     ClearBackground(BLACK);
+
+    screen.screenWidth = GetScreenWidth();
+    screen.screenHeight = GetScreenHeight();
 
     myShip.drawShip();
     

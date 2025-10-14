@@ -22,20 +22,24 @@ ship::ship(float x, float y, float size, Color color){
 
 
 void ship::calculateVectors(){
-    topV = {center.x + cosf(DEG2RAD * shipAngle) * shipSize, 
-            center.y + sinf(DEG2RAD * shipAngle) * shipSize};
+    topV = {center.x + sinf(DEG2RAD * (shipAngle+180)) * shipSize, 
+            center.y + cosf(DEG2RAD * (shipAngle+180)) * shipSize};
 
-    rightV = {center.x + cosf(DEG2RAD * (shipAngle + 120)) * shipSize, 
-            center.y + sinf(DEG2RAD * (shipAngle + 120)) * shipSize};
+    rightV = {center.x + sinf(DEG2RAD * (shipAngle-45)) * shipSize, 
+            center.y + cosf(DEG2RAD * (shipAngle-45)) * shipSize};
 
-    leftV = {center.x + cosf(DEG2RAD * (shipAngle + 240)) * shipSize, 
-            center.y + sinf(DEG2RAD * (shipAngle + 240)) * shipSize};
+    leftV = {center.x + sinf(DEG2RAD * (shipAngle+45)) * shipSize, 
+            center.y + cosf(DEG2RAD * (shipAngle+45)) * shipSize};
 
 }
 
 
 void ship::drawShip(){
     DrawTriangleLines(topV,rightV,leftV,shipColor);
+
+    DrawPixelV(topV,RED);
+    DrawPixelV(rightV,BLUE);
+    DrawPixelV(leftV,GREEN);
 }
 
 float ship::getSpeedX(){
