@@ -9,7 +9,6 @@ class ship{
 private:
 
 float speedX,speedY;
-float posX,posY;
 float shipAngle;
 float shipSize;
 Vector2 center, topV, rightV, leftV;
@@ -17,6 +16,8 @@ Color shipColor;
 
 
 void calculateVectors();
+void calculateSpeed();
+void wrapShipScreen();
 
 public:
 
@@ -24,13 +25,14 @@ ship(float x, float y, float size, Color color);
 
 
 void drawShip();
-
+void updateShipAngle(float newAngle);
+void applyThrust(float thrustPower);
 
 
 float getSpeedX();
 float getSpeedY();
-float getPosX();
-float getPosY();
+float getCenterX();
+float getCenterY();
 float getShipAngle();
 
 
