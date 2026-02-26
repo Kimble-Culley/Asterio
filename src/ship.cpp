@@ -5,7 +5,7 @@
 
 
 
-ship::ship(float x, float y, float size, Color color){
+Ship::Ship(float x, float y, float size, Color color){
     shipSize = size;
     shipColor = color;
 
@@ -18,9 +18,8 @@ ship::ship(float x, float y, float size, Color color){
 }
 
 
-//Calculate vertex positions
 
-void ship::calculateVectors(){
+void Ship::calculateVectors(){
     if(shipAngle >= 360 || shipAngle <= -360){
         shipAngle = 0;
     }
@@ -37,10 +36,7 @@ void ship::calculateVectors(){
 }
 
 
-//Movement and thrust
-
-
-void ship::calculateSpeed() {
+void Ship::calculateSpeed() {
 
     center.x += speedX * GetFrameTime();
     center.y += speedY * GetFrameTime();
@@ -50,10 +46,9 @@ void ship::calculateSpeed() {
     speedY *= 0.998f;
 }
 
-void ship::applyThrust(float thrustPower) {
+void Ship::applyThrust(float thrustPower) {
 
     float rad = DEG2RAD * shipAngle;
-
 
     speedX += thrustPower * cosf(rad);
     speedY += thrustPower * sinf(rad);
@@ -62,14 +57,14 @@ void ship::applyThrust(float thrustPower) {
 
 //Rotation and Drawing
 
-void ship::updateShipAngle(float newAngle){
+void Ship::updateShipAngle(float newAngle){
     shipAngle += newAngle;
 }
 
-void ship::drawShip(){
+void Ship::drawShip(){
     calculateVectors();
     calculateSpeed();
-    wrapShipScreen();
+    wrapPosition(center);
 
     DrawTriangleLines(topV,rightV,leftV,shipColor);
 
@@ -79,22 +74,6 @@ void ship::drawShip(){
     DrawPixelV(leftV,GREEN);
 }
 
-void ship::wrapShipScreen(){
-    if(center.x > GetScreenWidth()){
-        center.x = 0;
-    }
-    else if (center.x < 0){
-        center.x = GetScreenWidth();
-    }
-
-    if(center.y > GetScreenHeight()){
-        center.y = 0;
-    }
-    else if (center.y < 0){
-        center.y = GetScreenHeight();
-    }
-
-}
 
 
 
@@ -105,12 +84,14 @@ void ship::wrapShipScreen(){
 //                 //
 //*****************//
 
-float ship::getSpeedX(){ return speedX; }
+float Ship::getSpeedX() const{ return speedX; }
 
-float ship::getSpeedY(){ return speedY; }
+float Ship::getSpeedY() const{ return speedY; }
 
-float ship::getCenterX(){ return center.x; }
+float Ship::getCenterX() const{ return center.x; }
 
-float ship::getCenterY(){ return center.y; }
+float Ship::getCenterY() const{ return center.y; }
 
-float ship::getShipAngle(){ return shipAngle; }
+float Ship::getShipAngle() const{ return shipAngle; }
+
+Vector2 Ship::getVector() const{ return topV; }

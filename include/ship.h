@@ -1,10 +1,9 @@
-#ifndef SHIP_H
-#define SHIP_H
+#pragma once
 
 #include "raylib.h"
+#include "screen.h"
 
-
-class ship{
+class Ship{
 
 private:
 
@@ -17,25 +16,23 @@ Color shipColor;
 
 void calculateVectors();
 void calculateSpeed();
-void wrapShipScreen();
+
 
 public:
 
-ship(float x, float y, float size, Color color);
+Ship(float x, float y, float size, Color color);
 
 
 void drawShip();
 void updateShipAngle(float newAngle);
 void applyThrust(float thrustPower);
 
-
-float getSpeedX();
-float getSpeedY();
-float getCenterX();
-float getCenterY();
-float getShipAngle();
+float getSpeedX() const;
+float getSpeedY() const;
+float getCenterX() const;
+float getCenterY() const;
+float getShipAngle() const;
+Vector2 getVector() const;
 
 
 };
-
-#endif //SHIP_H
