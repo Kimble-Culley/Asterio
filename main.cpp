@@ -71,6 +71,9 @@ while(!WindowShouldClose()){
         bullet.draw();
     }
 
+
+    DrawPolyLines(myShip.getVector(),32,100,10,WHITE);
+
     EndDrawing();
 }
 
